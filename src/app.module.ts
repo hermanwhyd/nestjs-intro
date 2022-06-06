@@ -1,10 +1,11 @@
 import { ConfigModule } from './config/config.module';
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProductsModule } from './products/product.module';
 import { ConfigService } from './config/config.service';
+import { AppLoggerMiddleware } from './middleware/applogger.middleware';
 
 @Module({
   imports: [
@@ -20,4 +21,8 @@ import { ConfigService } from './config/config.service';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer): void {
+    consumer.apply(AppLoggerMiddleware).forRoutes('*');
+  }
+}

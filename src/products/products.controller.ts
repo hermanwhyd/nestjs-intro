@@ -14,7 +14,7 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) { }
 
   @Get()
-  async getAllProducts() {
+  async getAllProducts(req, res) {
     const products = await this.productsService.getProducts();
     return products;
   }

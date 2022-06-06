@@ -20,6 +20,10 @@ export class ConfigService {
     return this.get('PORT');
   }
 
+  public async getSwaggerPath() {
+    return this.get('SWAGGER_PATH') || 'swagger';
+  }
+
   public async getMongoConfig() {
     const config = {
       uri:
