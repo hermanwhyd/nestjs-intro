@@ -20,7 +20,7 @@ export class ProductsController {
     return products;
   }
 
-  @Get(':id')
+  @Get('id/:id')
   async getProduct(@Param('id') id: string) {
     const product = await this.productsService.getSigleProduct(id);
     return product;
