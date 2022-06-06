@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 
@@ -14,7 +15,7 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) { }
 
   @Get()
-  async getAllProducts(req, res) {
+  async getAllProducts() {
     const products = await this.productsService.getProducts();
     return products;
   }
@@ -38,10 +39,10 @@ export class ProductsController {
 
   @Patch(':id')
   async updateProduct(
+    @Query('title') title: string,
+    @Query('description') desc: string,
+    @Query('price') price: number,
     @Param('id') id: string,
-    @Body('title') title: string,
-    @Body('description') desc: string,
-    @Body('price') price: number,
   ) {
     const product = await this.productsService.updateProduct(
       id,
