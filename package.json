@@ -2,9 +2,13 @@
   "name": "nestjs-intro",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "HermanW",
   "private": true,
   "license": "UNLICENSED",
+  "engines": {
+    "npm": "8.12.1",
+    "node": "v16.15.1"
+  },
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
