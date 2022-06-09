@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Headers,
   Param,
   Patch,
   Post,
@@ -18,6 +19,23 @@ export class ProductsController {
   async getAllProducts() {
     const products = await this.productsService.getProducts();
     return products;
+  }
+
+  @Get('/:id/secure')
+  async getProductSecure(
+    @Param('id') id: string,
+    @Headers('authorization') auth: string,
+  ) {
+    // validate authorization
+    if (auth === undefined) {
+      return {
+        code: 401,
+        message: 'Unauthorize access',
+      };
+    }
+
+    const product = await this.productsService.getSigleProduct(id);
+    return product;
   }
 
   @Get('id/:id')
