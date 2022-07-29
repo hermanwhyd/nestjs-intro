@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Put,
   Headers,
   Param,
   Patch,
@@ -53,6 +54,22 @@ export class ProductsController {
     const newId = await this.productsService.insertProduct(title, desc, price);
 
     return { id: newId };
+  }
+  
+  @Put(':id')
+  async updateFullProduct(
+    @Body('title') title: string,
+    @Body('description') desc: string,
+    @Body('price') price: number,
+    @Param('id') id: string,
+  ) {
+    const product = await this.productsService.updateProduct(
+      id,
+      title,
+      desc,
+      price,
+    );
+    return product;
   }
 
   @Patch(':id')
